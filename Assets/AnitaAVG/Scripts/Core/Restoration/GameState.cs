@@ -17,10 +17,9 @@ namespace Anita
 
         // 节点名字
         public readonly string nodeName;
-
         // 对话的索引
         public readonly int dialogueIndex;
-
+        // 
 
 
     }

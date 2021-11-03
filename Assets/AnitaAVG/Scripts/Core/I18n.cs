@@ -1,191 +1,186 @@
-/*
- * @Author: your name
- * @Date: 2021-09-01 20:22:38
- * @LastEditTime: 2021-09-28 15:31:19
- * @LastEditors: wanghr
- * @Description: 暂时先屏蔽掉
- * @FilePath: \AnitaGame\Assets\AnitaAVG\Scripts\Core\I18n.cs
- */
+// 国际化接口
+// TODO 以后支持国际化 目前只用来提供部分接口
+using Newtonsoft.Json; // 调用NewtonsoftJson.dll
+using System;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using UnityEngine.Events;
 
-// using Newtonsoft.Json;
-// using System;
-// using System.Collections.Generic;
-// using System.IO;
-// using UnityEngine;
-// using UnityEngine.Events;
+namespace Anita
+{
+    // object的json化
+    //
+    // Example:
+    // "ivebeenthere": ["I've never been there", "I've been there once", "I've been there twice", "I've been there {0} times"]
+    // __("ivebeenthere", 2) == "I've been there twice"
+    // __("ivebeenthere", 4) == "I've been there 4 times"
+    using TranslationBundle = Dictionary<string, object>;
 
-// namespace Anita
-// {
-//     // object can be string or string[]
-//     //
-//     // For the i-th (zero-based) string in the string[],
-//     // it will be used as the translation if the first argument provided to __ is i
-//     //
-//     // Example:
-//     // "ivebeenthere": ["I've never been there", "I've been there once", "I've been there twice", "I've been there {0} times"]
-//     // __("ivebeenthere", 2) == "I've been there twice"
-//     // __("ivebeenthere", 4) == "I've been there 4 times"
-//     using TranslationBundle = Dictionary<string, object>;
+    //[ExportCustomType]
+    public static class I18n
+    {
+        public const string LocalePath = "Locales/";
 
-//     [ExportCustomType]
-//     public static class I18n
-//     {
-//         public const string LocalePath = "Locales/";
+        // 至少先支持下中英
+        public static readonly SystemLanguage[] SupportedLocales =
+            {SystemLanguage.ChineseSimplified, SystemLanguage.English};
+        
+        // 默认肯定是中文
+        public static SystemLanguage DefaultLocale => SupportedLocales[0];
 
-//         public static readonly SystemLanguage[] SupportedLocales =
-//             {SystemLanguage.ChineseSimplified, SystemLanguage.English};
+        // Note: 这里也不应该特别绝对 目前先根据机体语言环境选择
+        private static SystemLanguage _currentLocale = FallbackLocale(Application.systemLanguage);
 
-//         public static SystemLanguage DefaultLocale => SupportedLocales[0];
+        public static SystemLanguage CurrentLocale
+        {
+            get => _currentLocale;
+            set
+            {
+                value = FallbackLocale(value);
+                if (value == _currentLocale)
+                {
+                    return;
+                }
 
-//         private static SystemLanguage _currentLocale = FallbackLocale(Application.systemLanguage);
+                _currentLocale = value;
+                LocaleChanged.Invoke();
+            }
+        }
 
-//         public static SystemLanguage CurrentLocale
-//         {
-//             get => _currentLocale;
-//             set
-//             {
-//                 value = FallbackLocale(value);
-//                 if (value == _currentLocale)
-//                 {
-//                     return;
-//                 }
+        // 本地化的回调 目前只支持中英
+        private static SystemLanguage FallbackLocale(SystemLanguage locale)
+        {
+            if (locale == SystemLanguage.Chinese || locale == SystemLanguage.ChineseSimplified ||
+                locale == SystemLanguage.ChineseTraditional)
+            {
+                return SystemLanguage.ChineseSimplified;
+            }
+            else
+            {
+                return SystemLanguage.English;
+            }
+        }
 
-//                 _currentLocale = value;
-//                 LocaleChanged.Invoke();
-//             }
-//         }
+        public static readonly UnityEvent LocaleChanged = new UnityEvent();
 
-//         private static SystemLanguage FallbackLocale(SystemLanguage locale)
-//         {
-//             if (locale == SystemLanguage.Chinese || locale == SystemLanguage.ChineseSimplified ||
-//                 locale == SystemLanguage.ChineseTraditional)
-//             {
-//                 return SystemLanguage.ChineseSimplified;
-//             }
-//             else
-//             {
-//                 return SystemLanguage.English;
-//             }
-//         }
+        private static bool Inited;
 
-//         public static readonly UnityEvent LocaleChanged = new UnityEvent();
+        // 初始化
+        private static void Init()
+        {
+            if (Inited) return;
+            LoadTranslationBundles();
+            Inited = true;
+        }
 
-//         private static bool Inited;
+        private static readonly Dictionary<SystemLanguage, TranslationBundle> TranslationBundles =
+            new Dictionary<SystemLanguage, TranslationBundle>();
 
-//         private static void Init()
-//         {
-//             if (Inited) return;
-//             LoadTranslationBundles();
-//             Inited = true;
-//         }
+        private static void LoadTranslationBundles()
+        {
+            foreach (var locale in SupportedLocales)
+            {
+                var textAsset = Resources.Load(LocalePath + locale) as TextAsset;
+                // 把asset反序列化回去
+                TranslationBundles[locale] = JsonConvert.DeserializeObject<TranslationBundle>(textAsset.text);
+            }
+        }
 
-//         private static readonly Dictionary<SystemLanguage, TranslationBundle> TranslationBundles =
-//             new Dictionary<SystemLanguage, TranslationBundle>();
+        /// <summary>
+        /// 通过key和参数返回本地化翻译
+        /// </summary>
+        /// <param name="locale"></param>
+        /// <param name="key">Key to specify the translation</param>
+        /// <param name="args">Arguments to provide to the translation as a format string.<para />
+        /// <returns>The translated string.</returns>
+        public static string __(SystemLanguage locale, string key, params object[] args)
+        {
+#if UNITY_EDITOR
+            EditorOnly_GetLatestTranslation();
+#endif
 
-//         private static void LoadTranslationBundles()
-//         {
-//             foreach (var locale in SupportedLocales)
-//             {
-//                 var textAsset = Resources.Load(LocalePath + locale) as TextAsset;
-//                 TranslationBundles[locale] = JsonConvert.DeserializeObject<TranslationBundle>(textAsset.text);
-//             }
-//         }
+            Init();
 
-//         /// <summary>
-//         /// Get the translation specified by key and optionally deal with the plurals and format arguments. (Shorthand)<para />
-//         /// Translation will be automatically reloaded if the JSON file is changed.
-//         /// </summary>
-//         /// <param name="locale"></param>
-//         /// <param name="key">Key to specify the translation</param>
-//         /// <param name="args">Arguments to provide to the translation as a format string.<para />
-//         /// The first argument will be used to determine the quantity if needed.</param>
-//         /// <returns>The translated string.</returns>
-//         public static string __(SystemLanguage locale, string key, params object[] args)
-//         {
-// #if UNITY_EDITOR
-//             EditorOnly_GetLatestTranslation();
-// #endif
+            string translation = key;
 
-//             Init();
+            if (TranslationBundles[locale].TryGetValue(key, out var raw))
+            {
+                if (raw is string value)
+                {
+                    translation = value;
+                }
+                else if (raw is string[] formats)
+                {
+                    if (formats.Length == 0)
+                    {
+                        Debug.LogWarningFormat("Anita: Empty translation string list for: {0}", key);
+                    }
+                    else if (args.Length == 0)
+                    {
+                        translation = formats[0];
+                    }
+                    else
+                    {
+                        // 第一参数表示数量
+                        object arg1 = args[0];
+                        if (arg1 is int i)
+                        {
+                            translation = formats[Math.Min(i, formats.Length - 1)];
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogWarningFormat("Anita: Invalid translation format for: {0}", key);
+                }
 
-//             string translation = key;
+                if (args.Length > 0)
+                {
+                    translation = string.Format(translation, args);
+                }
+            }
+            else
+            {
+                Debug.LogWarningFormat("Anita: Missing translation for: {0}", key);
+            }
 
-//             if (TranslationBundles[locale].TryGetValue(key, out var raw))
-//             {
-//                 if (raw is string value)
-//                 {
-//                     translation = value;
-//                 }
-//                 else if (raw is string[] formats)
-//                 {
-//                     if (formats.Length == 0)
-//                     {
-//                         Debug.LogWarningFormat("Nova: Empty translation string list for: {0}", key);
-//                     }
-//                     else if (args.Length == 0)
-//                     {
-//                         translation = formats[0];
-//                     }
-//                     else
-//                     {
-//                         // The first argument will determine the quantity
-//                         object arg1 = args[0];
-//                         if (arg1 is int i)
-//                         {
-//                             translation = formats[Math.Min(i, formats.Length - 1)];
-//                         }
-//                     }
-//                 }
-//                 else
-//                 {
-//                     Debug.LogWarningFormat("Nova: Invalid translation format for: {0}", key);
-//                 }
+            return translation;
+        }
 
-//                 if (args.Length > 0)
-//                 {
-//                     translation = string.Format(translation, args);
-//                 }
-//             }
-//             else
-//             {
-//                 Debug.LogWarningFormat("Nova: Missing translation for: {0}", key);
-//             }
+        public static string __(string key, params object[] args)
+        {
+            return __(CurrentLocale, key, args);
+        }
 
-//             return translation;
-//         }
+        // 带默认的本地化翻译
+        public static string __(Dictionary<SystemLanguage, string> dict)
+        {
+            if (dict.ContainsKey(CurrentLocale))
+            {
+                return dict[CurrentLocale];
+            }
+            else
+            {
+                return dict[DefaultLocale];
+            }
+        }
 
-//         public static string __(string key, params object[] args)
-//         {
-//             return __(CurrentLocale, key, args);
-//         }
+#if UNITY_EDITOR
+        private static string EditorTranslationPath => "Assets/AnitaAVG/Resources/" + LocalePath + CurrentLocale + ".json";
 
-//         // Get localized string with fallback to DefaultLocale
-//         public static string __(Dictionary<SystemLanguage, string> dict)
-//         {
-//             if (dict.ContainsKey(CurrentLocale))
-//             {
-//                 return dict[CurrentLocale];
-//             }
-//             else
-//             {
-//                 return dict[DefaultLocale];
-//             }
-//         }
+        private static DateTime LastWriteTime;
 
-// #if UNITY_EDITOR
-//         private static string EditorTranslationPath => "Assets/Nova/Resources/" + LocalePath + CurrentLocale + ".json";
-
-//         private static DateTime LastWriteTime;
-
-//         private static void EditorOnly_GetLatestTranslation()
-//         {
-//             var writeTime = File.GetLastWriteTime(EditorTranslationPath);
-//             if (writeTime != LastWriteTime)
-//             {
-//                 LastWriteTime = writeTime;
-//                 Inited = false;
-//             }
-//         }
-// #endif
-//     }
-// }
+        private static void EditorOnly_GetLatestTranslation()
+        {
+            var writeTime = File.GetLastWriteTime(EditorTranslationPath);
+            if (writeTime != LastWriteTime)
+            {
+                LastWriteTime = writeTime;
+                // 编辑时修改了文本翻译 则重置一下
+                Inited = false;
+            }
+        }
+#endif
+    }
+}

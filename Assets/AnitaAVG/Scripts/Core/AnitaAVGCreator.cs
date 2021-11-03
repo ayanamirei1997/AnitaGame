@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Anita
 {
-
-
+    
     /// <summary>
     /// 创建一个运行的prefab
     /// </summary>

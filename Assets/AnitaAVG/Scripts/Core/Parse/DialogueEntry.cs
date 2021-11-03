@@ -61,7 +61,7 @@ namespace Anita
         // 对
         public readonly Dictionary<SystemLanguage, string> dialogues = new Dictionary<SystemLanguage, string>();
 
-        // 要执行的action
+        // game运行到当前node时要执行的action
         private readonly LuaFunction action;
 
         public DialogueEntry(string characterName, string displayName, string dialogue, LuaFunction action)
@@ -90,7 +90,7 @@ namespace Anita
                 // catch (LuaException ex)
                 // {
                 //     throw new ScriptActionException(
-                //         $"Nova: Exception occurred when executing action: {I18n.__(dialogues)}", ex);
+                //         $"Anita: Exception occurred when executing action: {I18n.__(dialogues)}", ex);
                 // }
             }
         }
