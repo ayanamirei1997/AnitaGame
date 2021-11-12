@@ -1,11 +1,9 @@
-// 本接口代表 当游戏状态改变时，当前prefab可以存储相关信息
-
+// 如名字所示，本接口代表当游戏状态改变时，当前object可以存储相关信息
 namespace Anita
 {
-    
     public interface IRestorable
     {
-        // 每个prefab应该
+        // 至少应该有一个唯一的name标志自己
         string restorableObjectName { get; }
         
         // 应该在每条对话发生时调用

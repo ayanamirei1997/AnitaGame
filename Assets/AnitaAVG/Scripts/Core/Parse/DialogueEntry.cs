@@ -35,16 +35,16 @@ namespace Anita
         // 本地化中的格式化
         public string FormatNameDialogue()
         {
-            // var name = I18n.__(displayNames);
-            // var dialogue = I18n.__(dialogues);
-            // if (string.IsNullOrEmpty(name))
-            // {
-            //     return dialogue;
-            // }
-            // else
-            // {
-            //     return string.Format(I18n.__("format.namedialogue"), name, dialogue);
-            // }
+            var name = I18n.__(displayNames);
+            var dialogue = I18n.__(dialogues);
+            if (string.IsNullOrEmpty(name))
+            {
+                return dialogue;
+            }
+            else
+            {
+                return string.Format(I18n.__("format.namedialogue"), name, dialogue);
+            }
             return "";
         }
     }
@@ -55,10 +55,10 @@ namespace Anita
         // 内部角色名
         public readonly string characterName;
 
-        // 国际化后的
+        // 国际化后的名字
         public readonly Dictionary<SystemLanguage, string> displayNames = new Dictionary<SystemLanguage, string>();
 
-        // 对
+        // 对话
         public readonly Dictionary<SystemLanguage, string> dialogues = new Dictionary<SystemLanguage, string>();
 
         // game运行到当前node时要执行的action
@@ -67,8 +67,8 @@ namespace Anita
         public DialogueEntry(string characterName, string displayName, string dialogue, LuaFunction action)
         {
             this.characterName = characterName;
-            // displayNames[I18n.DefaultLocale] = displayName;
-            // dialogues[I18n.DefaultLocale] = dialogue;
+            displayNames[I18n.DefaultLocale] = displayName;
+            dialogues[I18n.DefaultLocale] = dialogue;
             this.action = action;
         }
 
@@ -83,15 +83,17 @@ namespace Anita
         {
             if (action != null)
             {
-                // try
-                // {
-                //     action.Call();
-                // }
-                // catch (LuaException ex)
-                // {
-                //     throw new ScriptActionException(
-                //         $"Anita: Exception occurred when executing action: {I18n.__(dialogues)}", ex);
-                // }
+                try
+                {
+                    action.Call();
+                }
+                catch (LuaException ex)
+                {
+                    // throw new ScriptActionException(
+                    //     $"Anita: Exception occurred when executing action: {I18n.__(dialogues)}", ex);
+                    
+                    Debug.Log("Anita:check action!");
+                }
             }
         }
 
