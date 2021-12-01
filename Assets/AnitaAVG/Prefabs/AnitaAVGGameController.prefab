@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4093446871661952}
   - component: {fileID: 2687448549842890919}
+  - component: {fileID: -2588711448724805478}
   m_Layer: 0
   m_Name: AnitaAVGGameController
   m_TagString: AnitaAVGGameController
@@ -47,3 +48,16 @@ MonoBehaviour:
   hotspot: {x: 0, y: 0}
   autoHideAfterDuration: 1
   hideAfterSeconds: 5
+--- !u!114 &-2588711448724805478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601974380940858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7bb1c019d37402c82d3b1049707ea88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSettingsJson: {fileID: 4900000, guid: bc28b442f43048842833af16af081c6e, type: 3}

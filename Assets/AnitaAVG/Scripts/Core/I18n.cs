@@ -9,15 +9,13 @@ using UnityEngine.Events;
 
 namespace Anita
 {
-    // object的json化
-    //
     // Example:
     // "ivebeenthere": ["I've never been there", "I've been there once", "I've been there twice", "I've been there {0} times"]
     // __("ivebeenthere", 2) == "I've been there twice"
     // __("ivebeenthere", 4) == "I've been there 4 times"
     using TranslationBundle = Dictionary<string, object>;
 
-    //[ExportCustomType]
+    [ExportCustomType]
     public static class I18n
     {
         public const string LocalePath = "Locales/";
@@ -90,10 +88,6 @@ namespace Anita
         /// <summary>
         /// 通过key和参数返回本地化翻译
         /// </summary>
-        /// <param name="locale"></param>
-        /// <param name="key">Key to specify the translation</param>
-        /// <param name="args">Arguments to provide to the translation as a format string.<para />
-        /// <returns>The translated string.</returns>
         public static string __(SystemLanguage locale, string key, params object[] args)
         {
 #if UNITY_EDITOR
