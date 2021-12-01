@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224333530190884814}
+  - component: {fileID: 114471260457821372}
   - component: {fileID: 114847438731727154}
   m_Layer: 5
   m_Name: Branch
@@ -36,6 +37,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 120}
   m_SizeDelta: {x: -240, y: -480}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &114471260457821372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740358830230386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb72d3f5a6c0241f6b42bf974d360877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  branchButtonPrefab: {fileID: 1283954230108114, guid: 715673b90003e4c0a97eeaa9141dc935,
+    type: 3}
+  backPanel: {fileID: 0}
+  imageFolder: Colorless/Branches
 --- !u!114 &114847438731727154
 MonoBehaviour:
   m_ObjectHideFlags: 0

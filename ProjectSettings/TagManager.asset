@@ -6,6 +6,10 @@ TagManager:
   tags:
   - AnitaAVGGameController
   - UICamera
+  - AnitaAnimation
+  - DialogueView
+  - Alert
+  - RederManager
   layers:
   - Default
   - TransparentFX
@@ -15,6 +19,7 @@ TagManager:
   - UI
   - 
   - 
+  - UI3D
   - 
   - 
   - 
@@ -22,9 +27,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - SpriteManager
+  - Mask
   - 
   - 
   - 

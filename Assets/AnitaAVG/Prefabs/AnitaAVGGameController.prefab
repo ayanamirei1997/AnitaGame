@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bf308dd7364bd2bfd0f2f3c3ed8981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorTexture: {fileID: 0}
+  cursorTexture: {fileID: 2800000, guid: 520113458b0f8144f934a4edef43ea71, type: 3}
   hotspot: {x: 0, y: 0}
   autoHideAfterDuration: 1
   hideAfterSeconds: 5
