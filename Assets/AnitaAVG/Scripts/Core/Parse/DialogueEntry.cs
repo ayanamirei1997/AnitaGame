@@ -1,4 +1,9 @@
-using Anita;
+/*
+ * 对话
+ * 单条
+ */
+
+using Anita.Exceptions;
 using System;
 using System.Collections.Generic;
 using LuaInterface;
@@ -89,17 +94,13 @@ namespace Anita
                 }
                 catch (LuaException ex)
                 {
-                    // throw new ScriptActionException(
-                    //     $"Anita: Exception occurred when executing action: {I18n.__(dialogues)}", ex);
-                    
-                    Debug.Log("Anita:check action!");
+                    throw new ScriptActionException(
+                        $"Anita: Exception occurred when executing action: {I18n.__(dialogues)}", ex);
+                    //Debug.Log("Anita:check action!");
                 }
             }
         }
 
         public DialogueDisplayData displayData => new DialogueDisplayData(characterName, displayNames, dialogues);
     }
-
-
-
 }
