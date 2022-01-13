@@ -32,7 +32,7 @@ anim:action(function() anim:stop() end)
 
 富文本：<color="green">爱是<voffset=1em>一道</voffset><size=200%>光</size>，<b>如<i>此<s>美<u>妙</u></s></i></b></color>
 
-<link="https://github.com/Lunatic-Works/Nova"><style=Link>超链接</style></link>
+<link="https://github.com/ayanamirei1997/AnitaGame"><style=Link>超链接</style></link>
 
 <|
 show(xiben, 'normal', pos_c)
@@ -51,7 +51,7 @@ tint(xiben, {1, 0.5, 0})
 角色变色
 
 <|
-cubic = Nova.AnimationEntry.CubicEasing(0, 0)
+cubic = Anita.AnimationEntry.CubicEasing(0, 0)
 anim:_do(_rotate { xiben, Vector3(0, 60, 90) }):_for(1
     ):_and(_scale { xiben, Vector3(0.8, 0.2, 1) }):_for(1
     ):_then(_rotate { xiben, Vector3(0, 0, 0) }):_for(2
