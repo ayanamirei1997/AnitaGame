@@ -4,12 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - AnitaAVGGameController
-  - UICamera
+  - AnitaGameController
+  - Alert
   - AnitaAnimation
   - DialogueView
-  - Alert
-  - RederManager
+  - UICamera
+  - RenderManager
   layers:
   - Default
   - TransparentFX
@@ -27,7 +27,7 @@ TagManager:
   - 
   - 
   - 
-  - SpriteManager
+  - SpriteMerger
   - Mask
   - 
   - 
