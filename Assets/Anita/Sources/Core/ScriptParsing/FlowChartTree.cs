@@ -96,6 +96,7 @@ namespace Anita
             }
 
             startNodes.Add(name, node);
+            Debug.Log($"Anita_tree_add_node : {name} ");
         }
 
         public void AddUnlockedStart(string name, FlowChartNode node)
