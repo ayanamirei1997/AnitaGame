@@ -43,9 +43,9 @@
     2. WriteCroppedTextures `保存裁剪后各图片`
     3. GenarateMetadata `生成asset, 存储对应sprite与裁剪偏移`
 4. 对应图示
-   ![avatar](https://github.com/ayanamirei1997/AnitaGame/ReadMeImage/crop_01.png)
-   ![avatar](https://github.com/ayanamirei1997/AnitaGame/ReadMeImage/crop_02.png)
-   ![avatar](https://github.com/ayanamirei1997/AnitaGame/ReadMeImage/crop_03.png)
+   ![avatar](https://github.com/ayanamirei1997/AnitaGame/blob/main/ReadMeImage/crop_01.png)
+   ![avatar](https://github.com/ayanamirei1997/AnitaGame/blob/main/ReadMeImage/crop_02.png)
+   ![avatar](https://github.com/ayanamirei1997/AnitaGame/blob/main/ReadMeImage/crop_03.png)
 
 ### 后续待补全......
 
