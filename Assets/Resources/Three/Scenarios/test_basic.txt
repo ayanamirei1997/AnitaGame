@@ -3,7 +3,7 @@ label 'test_basic'
 is_unlocked_start()
 |>
 <|
-show(bg, 'room')
+show(bg, 'meeting')
 stop(bgm)
 set_box()
 |>
@@ -38,7 +38,7 @@ anim:action(function() anim:stop() end)
 show(xiben, 'normal', pos_c)
 say(xiben, '01')
 |>
-孙西本：：“没有人带伞么？”
+苏文纨：：“这是我表妹唐晓芙。”
 
 <|
 move(xiben, pos_l)
@@ -67,7 +67,7 @@ anim_persist:loop(function(entry)
     return entry:wait(1
         ):action(show, bg, 'rain'
         ):wait(1
-        ):action(show, bg, 'room')
+        ):action(show, bg, 'meeting')
 end)
 anim_persist:loop(function(entry)
     return entry:wait(0.7

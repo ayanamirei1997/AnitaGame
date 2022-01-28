@@ -979,7 +979,6 @@ GameObject:
   - component: {fileID: 561584474}
   - component: {fileID: 561584473}
   - component: {fileID: 561584472}
-  - component: {fileID: 561584475}
   m_Layer: 5
   m_Name: TitleText
   m_TagString: Untagged
@@ -1053,7 +1052,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6D4B\u8BD5\u800C\u5DF2"
+  m_Text: "\u56F4\u57CE\uFF08\u6D4B\u8BD5\uFF09"
 --- !u!222 &561584474
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1062,18 +1061,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561584470}
   m_CullTransparentMesh: 0
---- !u!114 &561584475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561584470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4632018420a54cff9e7af2283adb0cfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &606319137
 GameObject:
   m_ObjectHideFlags: 0
@@ -2364,13 +2351,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   luaName: autoVoice
   autoVoiceConfigs:
-  - characterName: "\u738B\u4E8C\u5BAB"
+  - characterName: "\u5510\u6653\u8299"
     characterController: {fileID: 537562888}
     prefix: 
-  - characterName: "\u5F20\u6D45\u91CE"
+  - characterName: "\u65B9\u9E3F\u6E10"
     characterController: {fileID: 1839185672}
     prefix: 
-  - characterName: "\u5B59\u897F\u672C"
+  - characterName: "\u82CF\u6587\u7EA8"
     characterController: {fileID: 1964594893}
     prefix: 
   - characterName: "\u9648\u9AD8\u5929"

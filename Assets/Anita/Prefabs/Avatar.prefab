@@ -62,6 +62,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -89,13 +90,13 @@ MonoBehaviour:
   characterTextureMerger: {fileID: 0}
   luaGlobalName: avatar
   avatarConfigs:
-  - characterName: "\u738B\u4E8C\u5BAB"
+  - characterName: "\u5510\u6653\u8299"
     characterController: {fileID: 0}
     prefix: Ergong/
-  - characterName: "\u5F20\u6D45\u91CE"
+  - characterName: "\u65B9\u9E3F\u6E10"
     characterController: {fileID: 0}
     prefix: Qianye/
-  - characterName: "\u5B59\u897F\u672C"
+  - characterName: "\u82CF\u6587\u7EA8"
     characterController: {fileID: 0}
     prefix: Xiben/
   - characterName: "\u9648\u9AD8\u5929"

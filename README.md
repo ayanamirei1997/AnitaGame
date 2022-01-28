@@ -1,6 +1,8 @@
 # AnitaGame
 *一个基于Unity能够进行剧情演出(类AVG)的game demo，仅为个人娱乐自用.*
 ***
+*效果见: https://www.acfun.cn/v/ac33397309*
+***
 
 ## Feature
 * 立绘

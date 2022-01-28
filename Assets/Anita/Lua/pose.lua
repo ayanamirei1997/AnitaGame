@@ -1,6 +1,7 @@
 local poses = {
     ['ergong'] = {
         ['normal'] = {'body', 'mouth_smile', 'eye_normal', 'eyebrow_normal', 'hair'},
+        ['happy'] = {'body', 'mouth_smile', 'eye_smile', 'eyebrow_happy', 'hair'}
     },
     ['gaotian'] = {
         ['normal'] = {'body', 'mouth_smile', 'eye_normal', 'eyebrow_normal', 'hair'},
